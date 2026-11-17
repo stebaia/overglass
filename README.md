@@ -1,10 +1,73 @@
-# overglass
+<p align="center">
+  <a href="https://stebaia.github.io/overglass/">
+    <img src="https://stebaia.github.io/overglass/readme/banner.jpg" alt="A clear glass capsule bending a stack of coloured tiles" width="100%">
+  </a>
+</p>
 
-Real iOS system bars (Liquid Glass on iOS 26+) for Flutter, with **no platform views and no shader imitation**.
-The bars, sheets, menus, alerts and toasts float above Flutter as system views. Optional controls inside your
-content, such as buttons and switches, live in a separate import because they need platform views.
+<h1 align="center">overglass</h1>
+
+<p align="center">
+  <strong>Liquid Glass for Flutter. The real one.</strong><br>
+  Real iOS system bars, sheets, menus and alerts floating above your Flutter app.<br>
+  No platform views. No shader imitation.
+</p>
+
+<p align="center">
+  <a href="https://pub.dev/packages/overglass"><img src="https://img.shields.io/pub/v/overglass?include_prereleases&label=pub.dev&color=2997ff" alt="pub.dev version"></a>
+  <img src="https://img.shields.io/badge/iOS-26%2B-000000?logo=apple" alt="iOS 26 and later">
+  <img src="https://img.shields.io/badge/Flutter-3.38.1%2B-02569B?logo=flutter" alt="Flutter 3.38.1 and later">
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-lightgrey" alt="MIT License"></a>
+</p>
+
+<p align="center">
+  <a href="https://stebaia.github.io/overglass/"><strong>Website</strong></a> ·
+  <a href="https://pub.dev/packages/overglass">pub.dev</a> ·
+  <a href="example/lib/main.dart">Example app</a> ·
+  <a href="https://github.com/stebaia/overglass/issues">Issues</a>
+</p>
+
+<table align="center">
+  <tr>
+    <td align="center" width="50%">
+      <img src="https://stebaia.github.io/overglass/readme/surfaces.gif" alt="Scrolling a Flutter list under the system bars, then a native menu, a native alert and a Flutter dialog that dims the bars" width="280"><br>
+      <sub><b>System bars, menus and alerts over a plain <code>ListView</code></b></sub>
+    </td>
+    <td align="center" width="50%">
+      <img src="https://stebaia.github.io/overglass/readme/systabs.gif" alt="A system tab bar with an accessory that shrinks while scrolling down and grows back when scrolling up" width="280"><br>
+      <sub><b>System tabs that minimize while you scroll</b></sub>
+    </td>
+  </tr>
+</table>
+
+<p align="center"><sub>Unretouched recordings of the example app on an iOS 26.5 simulator.</sub></p>
+
+---
+
+## Why overglass
+
+Most "liquid glass" packages redraw the effect with blurs and shaders. overglass doesn't draw it at all.
+The bars are `UINavigationBar`, `UITabBar` and `UIMenu`, hosted in a view **beside** the FlutterView, so
+iOS renders the glass, the animations and the behaviour, and they bend the pixels Flutter draws underneath.
+
+- 🪟 **The system's own glass**: it looks right because it is the real control, drawn and animated by iOS.
+- 🧩 **No platform views** in the main library: the bars live outside the Flutter tree, not inside it.
+- 📐 **Reads like a `Scaffold`**: describe the bars, and `MediaQuery.padding` already includes them.
+- 🛟 **Falls back on its own**: Flutter-drawn bars on older iOS, Android, web and desktop, or your own builders.
+
+## Install
+
+```sh
+flutter pub add overglass
+```
+
+Build with **Xcode 26** to get Liquid Glass. Requires Flutter 3.38.1 or later. CocoaPods works from that version.
+Swift Package Manager needs Flutter 3.44 or later.
+
+## Quick start
 
 ```dart
+import 'package:overglass/overglass.dart';
+
 OverglassScaffold(
   topBar: OverglassTopBar(
     title: 'Home',
@@ -22,7 +85,30 @@ OverglassScaffold(
 );
 ```
 
+Menus, alerts and sheets are one call away:
+
+```dart
+final choice = await Overglass.showAlert(
+  context,
+  title: 'Native alert',
+  message: 'Presented by UIKit.',
+  actions: const [
+    OverglassAlertAction(id: 'cancel', label: 'Cancel', style: OverglassAlertActionStyle.cancel),
+    OverglassAlertAction(id: 'ok', label: 'Confirm'),
+  ],
+);
+```
+
 ## What you get
+
+<table>
+  <tr>
+    <td align="center" width="25%"><img src="https://stebaia.github.io/overglass/readme/ex-menu.png" alt="A native menu open over a colourful Flutter list" width="160"><br><sub><b>Menus</b><br><code>UIMenu</code></sub></td>
+    <td align="center" width="25%"><img src="https://stebaia.github.io/overglass/readme/ex-alert.png" alt="A native alert with Cancel and Confirm" width="160"><br><sub><b>Alerts</b><br><code>UIAlertController</code></sub></td>
+    <td align="center" width="25%"><img src="https://stebaia.github.io/overglass/readme/ex-systabs.png" alt="A minimized system tab bar with a Now playing accessory" width="160"><br><sub><b>Tabs and accessory</b><br><code>UITabBarController</code></sub></td>
+    <td align="center" width="25%"><img src="https://stebaia.github.io/overglass/readme/ex-controls.png" alt="System buttons, switch, slider, gauges and date picker" width="160"><br><sub><b>Controls</b><br><code>controls.dart</code></sub></td>
+  </tr>
+</table>
 
 | Feature | API | Native control |
 | --- | --- | --- |
@@ -54,6 +140,10 @@ elsewhere Flutter draws a simple stand-in. They come from their own import, and 
 
 ```dart
 import 'package:overglass/controls.dart';
+
+OverglassSwitch(value: wifi, onChanged: (on) => setState(() => wifi = on), semanticLabel: 'Wi-Fi'),
+OverglassSlider(value: volume, onChanged: (v) => setState(() => volume = v)),
+OverglassButton(label: 'Save', style: OverglassButtonStyle.prominent, onPressed: save),
 ```
 
 | Control | Widget | Native control |
@@ -64,20 +154,19 @@ import 'package:overglass/controls.dart';
 | Date picker | `OverglassDatePicker` | Compact `UIDatePicker` |
 | Gauge, circular or linear | `OverglassGauge` | SwiftUI `Gauge`, a progress bar before iOS 16 |
 
-```dart
-OverglassSwitch(value: wifi, onChanged: (on) => setState(() => wifi = on), semanticLabel: 'Wi-Fi'),
-OverglassSlider(value: volume, onChanged: (v) => setState(() => volume = v)),
-OverglassButton(label: 'Save', style: OverglassButtonStyle.prominent, onPressed: save),
-```
-
-Build with Xcode 26 to get Liquid Glass.
-
-Requires Flutter 3.38.1 or later. CocoaPods works from that version. Swift Package Manager needs Flutter 3.44 or later.
-
 ## How it works
 
 Liquid Glass belongs to the navigation layer that floats above content. That layer is small and fixed,
 so it does not have to live inside the Flutter tree.
+
+```text
+┌──────────────────────────────┐
+│  overglass host view         │  UINavigationBar · UITabBar · UIMenu …
+│  (sibling above Flutter)     │  touches outside the bars fall through ↓
+├──────────────────────────────┤
+│  FlutterView                 │  your widgets, refracted by the glass above
+└──────────────────────────────┘
+```
 
 - The system bars sit in a host view that is a **sibling above the FlutterView**.
 - On iOS 26.5 simulators the system glass refracts Flutter's rendered content. This is observed behavior,
@@ -98,6 +187,16 @@ so it does not have to live inside the Flutter tree.
 
 There is no observer to install. Override the table with `coverPolicy`. The package imports only
 `package:flutter/widgets.dart`, so the `material_ui` / `cupertino_ui` migration does not affect it.
+
+## Brand inside, system outside
+
+<img align="right" src="https://stebaia.github.io/overglass/readme/sat-collection.png" alt="A Saturn collection page with glass back and action buttons tinted by the page colour" width="200">
+
+Your screens stay entirely yours. In **Saturn**, an app built on overglass, every page is Flutter with its own
+type and colour, while the tab bar, the search button and the navigation actions are the system's,
+tinted by the content underneath.
+
+<br clear="right">
 
 ## Limits
 
@@ -125,7 +224,9 @@ There is no observer to install. Override the table with `coverPolicy`. The pack
 
 ## Status
 
-Pre-release. Minimize on scroll, the toast and the controls inside content were tried by hand on an iPhone 15 Pro; the iPad sidebar has not been run yet
+> **Pre-release.** The API may still change before 1.0.
+
+Minimize on scroll, the toast and the controls inside content were tried by hand on an iPhone 15 Pro; the iPad sidebar has not been run yet
 and none of them has automated UI tests.
 The native test suite passes on an iPhone iOS 26.5 simulator with Flutter 3.44.5.
 On an iPad iOS 26.5 simulator 15 of 17 UI tests pass: the second scaffold's tabs and the search cancel button still need work.
@@ -136,3 +237,10 @@ Not yet tested with a live VoiceOver session or with two iPad windows.
 Performance data is preliminary. On that iPhone at 120 Hz, Flutter's raster time with `overglass` matched a list with no bars
 (0.52 ms against 0.57 ms on average, one run). Two 20-second Instruments runs showed 6 and 3 hitches, against 0 and 3 without bars.
 That is too little data to compare it with other approaches.
+
+## License
+
+MIT. See [LICENSE](LICENSE).
+
+<sub>overglass is an independent open-source project, not affiliated with or endorsed by Apple Inc.
+iOS, UIKit and Liquid Glass are trademarks of Apple Inc. Flutter is a trademark of Google LLC.</sub>

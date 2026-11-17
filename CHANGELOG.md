@@ -1,3 +1,10 @@
+## 0.3.0-dev.3
+
+- New website: https://stebaia.github.io/overglass/
+- README with recordings of the example app, a gallery and a quick start.
+- `homepage` in the pubspec points to the website.
+- No changes to the library code.
+
 ## 0.3.0-dev.1
 
 - Sessions: several `OverglassScaffold`s on different routes no longer interfere.
