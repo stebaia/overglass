@@ -1,0 +1,14 @@
+include: package:flutter_lints/flutter.yaml
+
+analyzer:
+  exclude:
+    - build/**
+    - ios/**
+    - benchmark/**
+
+formatter:
+  page_width: 120
+
+linter:
+  rules:
+    - unawaited_futures

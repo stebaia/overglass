@@ -1,0 +1,39 @@
+name: overglass
+description: "Real iOS system chrome and controls (Liquid Glass) for Flutter: bars hosted beside the FlutterView with no platform views."
+version: 0.3.0-dev.1
+
+topics:
+  - cupertino
+  - ios
+  - liquid-glass
+  - navigation
+  - native
+
+screenshots:
+  - description: System tab bar and top bar refracting a scrolling Flutter list.
+    path: doc/screenshots/glass-over-flutter.png
+  - description: Native bars dimmed under a Flutter dialog.
+    path: doc/screenshots/dialog.png
+  - description: Native menu opened from a bar action.
+    path: doc/screenshots/menu.png
+
+environment:
+  sdk: ^3.10.0
+  flutter: '>=3.38.1'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
+  plugin:
+    platforms:
+      ios:
+        pluginClass: OverglassPlugin
+        dartPluginClass: OverglassDartPlugin
+

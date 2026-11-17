@@ -1,0 +1,11 @@
+.dart_tool/
+.github/
+.idea/
+*.iml
+build/
+benchmark/
+doc/verification/
+example/ios/
+example/build/
+example/.dart_tool/
+pubspec.lock
