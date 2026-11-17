@@ -1,5 +1,7 @@
 name: overglass
 description: "Real iOS system chrome and controls (Liquid Glass) for Flutter: bars hosted beside the FlutterView with no platform views."
+repository: https://github.com/stebaia/overglass
+issue_tracker: https://github.com/stebaia/overglass/issues
 version: 0.3.0-dev.1
 
 topics:
