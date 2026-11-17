@@ -30,9 +30,11 @@ final class OverglassUITests: XCTestCase {
     item.tap()
   }
 
+  /// CI simulators are much slower than a local one, so this waits longer
+  /// than the other checks.
   private func waitUntilGone(_ target: XCUIElement) {
     let gone = expectation(for: NSPredicate(format: "exists == false"), evaluatedWith: target)
-    wait(for: [gone], timeout: 10)
+    wait(for: [gone], timeout: 25)
   }
 
   private func assertTabsReachFlutter(file: StaticString = #filePath, line: UInt = #line) {
