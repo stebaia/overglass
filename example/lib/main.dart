@@ -1,3 +1,5 @@
+// The example still supports Flutter 3.38, which has no material_ui package.
+// ignore: deprecated_member_use
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:overglass/controls.dart';
