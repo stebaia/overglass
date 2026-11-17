@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>overglass — real Liquid Glass for Flutter</title>
+<meta name="description" content="Real iOS system bars, sheets, menus and alerts (Liquid Glass on iOS 26+) for Flutter. No platform views, no shader imitation.">
+<meta name="theme-color" content="#000000">
+<meta property="og:title" content="overglass — real Liquid Glass for Flutter">
+<meta property="og:description" content="Real iOS system chrome above your Flutter app. No platform views, no shader imitation.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://stebaia.github.io/overglass/">
+<meta property="og:image" content="https://stebaia.github.io/overglass/assets/img/hero.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://stebaia.github.io/overglass/">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<header class="nav" id="nav">
+  <a class="nav-brand" href="#top" aria-label="overglass, back to top">overglass</a>
+  <nav class="nav-links" aria-label="Sections">
+    <a href="#real">Real glass</a>
+    <a href="#how">How it works</a>
+    <a href="#surfaces">Surfaces</a>
+    <a href="#controls">Controls</a>
+    <a href="#code">Code</a>
+  </nav>
+  <a class="btn btn-small" href="https://pub.dev/packages/overglass" target="_blank" rel="noopener">pub.dev</a>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero dark">
+    <p class="eyebrow reveal">Flutter package · iOS 26</p>
+    <h1 class="display reveal">Liquid Glass.<br><span class="dim">The real one.</span></h1>
+    <p class="lede reveal">overglass floats real iOS system bars, sheets, menus and alerts above your Flutter app. No platform views. No shader imitation.</p>
+    <div class="cta reveal">
+      <a class="btn" href="https://pub.dev/packages/overglass" target="_blank" rel="noopener">Get it on pub.dev</a>
+      <a class="link" href="https://github.com/stebaia/overglass" target="_blank" rel="noopener">View on GitHub <span aria-hidden="true">›</span></a>
+    </div>
+    <button class="install reveal" type="button" data-copy="flutter pub add overglass" aria-label="Copy install command">
+      <code>flutter pub add overglass</code>
+      <span class="install-hint" aria-live="polite">Copy</span>
+    </button>
+    <div class="hero-film" id="heroFilm">
+      <video class="film" muted loop playsinline preload="metadata" poster="assets/img/hero.jpg" data-autoplay>
+        <source src="assets/video/hero.mp4" type="video/mp4">
+      </video>
+    </div>
+  </section>
+
+  <!-- STATEMENT -->
+  <section class="statement dark" id="real">
+    <p class="statement-text" id="statement">The bars are not drawn to look like iOS. They are iOS. UINavigationBar, UITabBar and UIMenu, hosted beside your FlutterView, bending the pixels Flutter renders underneath.</p>
+  </section>
+
+  <!-- REAL RECORDING -->
+  <section class="split light">
+    <div class="split-copy">
+      <p class="eyebrow reveal">Unretouched</p>
+      <h2 class="headline reveal">Your Flutter list.<br>Refracted by the system.</h2>
+      <p class="body reveal">This is the example app scrolling on an iOS 26.5 simulator. The tab bar and the top bar are system views. The colours passing through them are a plain <code>ListView</code>.</p>
+      <p class="note reveal">Screen recording, not a mock-up. On physical devices refraction of Flutter content is still being verified.</p>
+    </div>
+    <div class="split-media reveal">
+      <div class="phone">
+        <video muted loop playsinline preload="metadata" poster="assets/img/scroll-poster.jpg" data-autoplay>
+          <source src="assets/video/scroll.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="how dark" id="how">
+    <p class="eyebrow reveal">How it works</p>
+    <h2 class="headline center reveal">A layer above.<br><span class="dim">Not a layer inside.</span></h2>
+    <div class="how-film reveal">
+      <video class="film" muted loop playsinline preload="metadata" poster="assets/img/layers.jpg" data-autoplay>
+        <source src="assets/video/layers.mp4" type="video/mp4">
+      </video>
+    </div>
+    <ol class="steps">
+      <li class="reveal">
+        <span class="step-n">01</span>
+        <h3>A sibling of the FlutterView</h3>
+        <p>Liquid Glass belongs to the navigation layer. That layer is small and fixed, so it lives in a host view placed above Flutter instead of inside the widget tree.</p>
+      </li>
+      <li class="reveal">
+        <span class="step-n">02</span>
+        <h3>Touches fall through</h3>
+        <p>Anything outside the bars reaches Flutter untouched. <code>MediaQuery.padding</code> already includes the bars, so your content lays out as usual.</p>
+      </li>
+      <li class="reveal">
+        <span class="step-n">03</span>
+        <h3>One description, native diffs</h3>
+        <p>Each scaffold sends a single declarative description of its bars. Native code applies only what changed. There is no observer to install.</p>
+      </li>
+    </ol>
+  </section>
+
+  <!-- SURFACES GALLERY -->
+  <section class="gallery light" id="surfaces">
+    <p class="eyebrow reveal">Surfaces</p>
+    <h2 class="headline center reveal">Everything that floats.</h2>
+    <p class="body center reveal">Menus, alerts, sheets, tabs that shrink as you scroll. Each one is the control UIKit ships, called from Dart.</p>
+
+    <div class="shots" role="list">
+      <figure class="shot reveal" role="listitem">
+        <div class="phone"><img src="assets/img/ex-menu.jpg" alt="A native menu open over a colourful Flutter list" loading="lazy" width="1206" height="2622"></div>
+        <figcaption><strong>Menus</strong><code>UIMenu</code></figcaption>
+      </figure>
+      <figure class="shot reveal" role="listitem">
+        <div class="phone"><img src="assets/img/ex-alert.jpg" alt="A native alert with Cancel and Confirm over a dimmed Flutter list" loading="lazy" width="1206" height="2622"></div>
+        <figcaption><strong>Alerts</strong><code>UIAlertController</code></figcaption>
+      </figure>
+      <figure class="shot reveal" role="listitem">
+        <div class="phone"><img src="assets/img/ex-systabs.jpg" alt="A minimized system tab bar with a Now playing accessory and a search tab" loading="lazy" width="1206" height="2622"></div>
+        <figcaption><strong>Tabs that minimize</strong><code>UITabBarController</code></figcaption>
+      </figure>
+      <figure class="shot reveal" role="listitem">
+        <div class="phone"><img src="assets/img/ex-home.jpg" alt="System top bar and tab bar with a badge over a Flutter list" loading="lazy" width="1206" height="2622"></div>
+        <figcaption><strong>Bars and badges</strong><code>UINavigationBar · UITabBar</code></figcaption>
+      </figure>
+    </div>
+
+    <ul class="bento">
+      <li class="reveal"><code>UINavigationBar</code><h3>Top bar</h3><p>Large titles, the system back button, leading and trailing actions.</p></li>
+      <li class="reveal"><code>UITabBar</code><h3>Tab bar</h3><p>Badges, a search tab, an accessory above the tabs.</p></li>
+      <li class="reveal"><code>UISearchBar</code><h3>Search</h3><p>In the top bar, or floating above the tab bar.</p></li>
+      <li class="reveal"><code>UISheetPresentationController</code><h3>Sheets</h3><p>With Flutter content, a list to pick from, or a date picker.</p></li>
+      <li class="reveal"><code>UIEditMenuInteraction</code><h3>Context menus</h3><p>On any Flutter widget, with a long press.</p></li>
+      <li class="reveal"><code>UIToolbar · UISegmentedControl</code><h3>Toolbar and segments</h3><p>A bottom toolbar and a segmented control in the top bar.</p></li>
+      <li class="reveal"><code>UIPopoverPresentationController</code><h3>Popovers</h3><p>Text and buttons, anchored to a rect in your layout.</p></li>
+      <li class="reveal"><code>UITabBarController</code><h3>iPad sidebar</h3><p>System tabs that open into a sidebar on larger screens.</p></li>
+      <li class="reveal"><code>Glass capsule</code><h3>Toasts</h3><p>iOS has no toast of its own, so this one is overglass's design.</p></li>
+    </ul>
+  </section>
+
+  <!-- CONTROLS -->
+  <section class="split dark" id="controls">
+    <div class="split-media reveal">
+      <div class="phone"><img src="assets/img/ex-controls.jpg" alt="System buttons, switch, slider, gauges and date picker inside a Flutter page" loading="lazy" width="1206" height="2622"></div>
+    </div>
+    <div class="split-copy">
+      <p class="eyebrow reveal">Controls</p>
+      <h2 class="headline reveal">System controls,<br>when you want them.</h2>
+      <p class="body reveal">Buttons, switches, sliders, gauges and date pickers that sit in the widget tree like any widget. They are platform views, so they come from their own import. Import only the main library and your app creates none.</p>
+<pre class="code reveal"><code><span class="k">import</span> <span class="s">'package:overglass/controls.dart'</span>;
+
+<span class="t">OverglassSwitch</span>(value: wifi, onChanged: setWifi),
+<span class="t">OverglassSlider</span>(value: volume, onChanged: setVolume),
+<span class="t">OverglassButton</span>(
+  label: <span class="s">'Save'</span>,
+  style: <span class="t">OverglassButtonStyle</span>.prominent,
+  onPressed: save,
+),</code></pre>
+    </div>
+  </section>
+
+  <!-- CODE -->
+  <section class="codeblock light" id="code">
+    <p class="eyebrow reveal">One widget</p>
+    <h2 class="headline center reveal">It reads like a Scaffold.</h2>
+    <p class="body center reveal">Describe the bars. overglass does the hosting, the sessions and the fallbacks.</p>
+<pre class="code code-big reveal"><code><span class="t">OverglassScaffold</span>(
+  topBar: <span class="t">OverglassTopBar</span>(
+    title: <span class="s">'Home'</span>,
+    trailing: [<span class="t">OverglassAction</span>.add(onPressed: add)],
+  ),
+  tabBar: <span class="t">OverglassTabBar</span>(
+    currentIndex: tab,
+    onChanged: (i) => setState(() => tab = i),
+    items: <span class="k">const</span> [
+      <span class="t">OverglassTab</span>(label: <span class="s">'Home'</span>, sfSymbol: <span class="s">'house.fill'</span>, icon: myHomeIcon),
+      <span class="t">OverglassTab</span>(label: <span class="s">'Search'</span>, sfSymbol: <span class="s">'magnifyingglass'</span>, icon: mySearchIcon, badge: <span class="s">'3'</span>),
+    ],
+  ),
+  body: <span class="t">ListView</span>(children: items), <span class="c">// MediaQuery.padding already includes the bars</span>
+);</code></pre>
+  </section>
+
+  <!-- IN A REAL APP -->
+  <section class="gallery dark" id="saturn">
+    <p class="eyebrow reveal">In a real app</p>
+    <h2 class="headline center reveal">Brand on the inside.<br><span class="dim">System on the outside.</span></h2>
+    <p class="body center reveal">Saturn is built on overglass. Its screens are entirely Flutter, with their own type and colour. The tab bar, the search button and the navigation actions are the system's.</p>
+    <div class="shots shots-3" role="list">
+      <figure class="shot reveal" role="listitem">
+        <div class="phone"><img src="assets/img/sat-board.jpg" alt="Saturn's board with a system tab bar and a separate search button" loading="lazy" width="1206" height="2622"></div>
+      </figure>
+      <figure class="shot reveal" role="listitem">
+        <div class="phone"><img src="assets/img/sat-collection.jpg" alt="A Saturn collection with glass back and action buttons tinted by the page colour" loading="lazy" width="1206" height="2622"></div>
+      </figure>
+      <figure class="shot reveal" role="listitem">
+        <div class="phone"><img src="assets/img/sat-roll.jpg" alt="Saturn's camera roll tab with a system top bar title" loading="lazy" width="1206" height="2622"></div>
+      </figure>
+    </div>
+  </section>
+
+  <!-- EVERYWHERE ELSE -->
+  <section class="states light">
+    <div class="states-copy">
+      <p class="eyebrow reveal">Everywhere else</p>
+      <h2 class="headline reveal">It knows when<br>to step back.</h2>
+      <p class="body reveal">Dialogs, sheets, older systems, other platforms. overglass picks what the bars should do, and you can override it with <code>coverPolicy</code>.</p>
+    </div>
+    <dl class="states-list">
+      <div class="reveal"><dt>iOS 26+, built with Xcode 26</dt><dd>Real system controls</dd></div>
+      <div class="reveal"><dt>A Flutter dialog covers the page</dt><dd>Real controls, dimmed and inert</dd></div>
+      <div class="reveal"><dt>A new page replaces the scaffold</dt><dd>Bars stay in place and animate their content</dd></div>
+      <div class="reveal"><dt>A bottom sheet covers the page</dt><dd>A Flutter twin with the iOS 26 geometry</dd></div>
+      <div class="reveal"><dt>Older iOS, Android, web, desktop</dt><dd>Flutter-drawn bars, or your own builders</dd></div>
+    </dl>
+  </section>
+
+  <!-- HONEST -->
+  <section class="honest dark">
+    <figure class="honest-figure reveal">
+      <img src="assets/img/macro.jpg" alt="Macro render of a glass edge bending coloured stripes" loading="lazy" width="1344" height="752">
+    </figure>
+    <div class="honest-grid">
+      <div class="reveal">
+        <p class="stat">0</p>
+        <p class="stat-label">platform views created by the main library</p>
+      </div>
+      <div class="reveal">
+        <p class="stat">0</p>
+        <p class="stat-label">shaders pretending to be glass</p>
+      </div>
+      <div class="reveal">
+        <p class="stat">0.52<span class="unit">ms</span></p>
+        <p class="stat-label">average raster time on an iPhone 15 Pro at 120 Hz, against 0.57 ms for the same list with no bars</p>
+      </div>
+    </div>
+    <p class="note center reveal">Pre-release, version 0.3.0-dev.2. The performance figure comes from a single run and is preliminary. Glass that scrolls with content is out of scope, and Flutter cannot paint above the native bars. The full list of limits is in the README.</p>
+  </section>
+
+  <!-- CLOSING -->
+  <section class="closing dark">
+    <h2 class="display reveal">Stop imitating.<br><span class="dim">Start hosting.</span></h2>
+    <button class="install reveal" type="button" data-copy="flutter pub add overglass" aria-label="Copy install command">
+      <code>flutter pub add overglass</code>
+      <span class="install-hint" aria-live="polite">Copy</span>
+    </button>
+    <div class="cta reveal">
+      <a class="btn" href="https://pub.dev/packages/overglass" target="_blank" rel="noopener">Get it on pub.dev</a>
+      <a class="link" href="https://github.com/stebaia/overglass" target="_blank" rel="noopener">View on GitHub <span aria-hidden="true">›</span></a>
+    </div>
+    <p class="req reveal">Requires Flutter 3.38.1 or later. Build with Xcode 26 to get Liquid Glass.</p>
+  </section>
+</main>
+
+<footer class="footer">
+  <p>overglass is an independent open-source project released under the MIT License. It is not affiliated with or endorsed by Apple Inc. iOS, UIKit and Liquid Glass are trademarks of Apple Inc. Flutter is a trademark of Google LLC.</p>
+  <p>Glass renders and films generated with Higgsfield. App footage recorded on an iOS 26.5 simulator.</p>
+  <nav aria-label="Links">
+    <a href="https://pub.dev/packages/overglass" target="_blank" rel="noopener">pub.dev</a>
+    <a href="https://github.com/stebaia/overglass" target="_blank" rel="noopener">GitHub</a>
+    <a href="https://github.com/stebaia/overglass/issues" target="_blank" rel="noopener">Issues</a>
+  </nav>
+</footer>
+
+<script src="js/main.js" defer></script>
+</body>
+</html>
